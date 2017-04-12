@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+  <% include ../partials/nav.ejs %>
+  <% include ../partials/panneauJ.ejs %>
+<div id="saisiePseudo">
+			<h4>Bonjour, saisissez votre pseudo pour cette session</h4>
+			<input type="text" id="inputSaisiePseudo" text="" autofocus/>
+			<div id="resultPseudo">
+resultPseudo
+			</div>	
+			<button id="rentrer">rentrer</button>
+		</div>
+		<div id="accueil" class="container" hidden>Bienvenue <a id="bienvenuePseudo"></a>
+			<div class="row">
+        <div id="lancerPartie" class="col-md-2">
+          <h5>Lancer une partie</h5>
+          <select id="selecNveauJeu">
+              <option value="un jeu">un jeu</option>
+          </select>
+          <button id="boutonLancerPartie">lancer</button>
+        </div>
+        <div class="col-md-10">
+                <div id="parties" class="row">
+
+          
+               </div>
+
+        </div>
+				<div id="enTete">enTete</div>
+			</div>			
+		</div>
+<div id="QUEPOURDEV">
+    <div>
+      <h5>serveur</h5>
+      <button id="getListParties">getListParties</button>
+      <button id="getListJoueurs">getListJoueurs</button>
+    </div>
+    <div>
+      <h5>page</h5>
+    </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="/js/pages/var_window.js"></script>
+<script type="text/javascript" src="/js/pages/canvas.js"></script>
+<script type="text/javascript" src="/js/pages/modules.js"></script>
+<script type="text/javascript" src="/js/pages/com_client.js"></script>
+<script type="text/javascript" src="/js/pages/index.js"></script>
+</body>
+</html>

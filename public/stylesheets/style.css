@@ -1,0 +1,91 @@
+li
+{
+color:red;
+}
+#enTete, #canvas
+{
+	width: 90%; margin-left: 5%; margin-right: 5%;
+}
+#enTete
+{
+	height: 7%; margin-top: 3%; 
+} 
+#accueil
+{
+	text-align : center;
+}
+#canvas
+{
+	height: 80%; margin-top: 5%;
+}
+#cParti /* bouton */
+{
+	position: fixed; top: 40%; left:35%;
+}
+#lancerPartie
+{
+  position:absolute; bottom: 1%; right: 1%;
+}
+.advertKO
+{
+  color: red;
+}
+.advertOK
+{
+  color: green;
+}
+/*    STYLES BLOCS PARTIES :      */
+.partieLancee
+{
+
+}
+.enCours
+{
+  
+}
+.finie
+{
+  
+}
+.annulee
+{
+  
+}
+
+
+/*	
+ * 
+ * */
+ 
+ h1
+{
+color:red;
+}
+.jumbotron {
+  background: #532F8C;
+  color: white;
+  padding-bottom: 80px; }
+  .jumbotron .btn-primary {
+    background: #845ac7;
+    border-color: #845ac7; }
+    .jumbotron .btn-primary:hover {
+      background: #7646c1; }
+  .jumbotron p {
+    color: #d9ccee;
+    max-width: 75%;
+    margin: 1em auto 2em; }
+  .navbar + .jumbotron {
+    margin-top: -20px; }
+  .jumbotron .lang-logo {
+    display: block;
+    background: #B01302;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    border: 2px solid white; }
+    .jumbotron .lang-logo img {
+      max-width: 100%; }
+
+
