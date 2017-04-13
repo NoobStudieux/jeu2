@@ -22,10 +22,7 @@ function Partie(jeu="jeu non défini", listePartiesExistantes = []) { // class P
 			console.log(this.pseudo + "    " + this.points + " points    " + this.socketId);
 		};
         this.addJoueur = function(joueur){
-            
 			this.inscrits.push(joueur);
-     //       joueur.setPartie = this; // en finalité ne conserver que setPartie ici et dans joueur
-            console.log("test add joueuer");
 		};
         this.supprJoueur = function(pseudeo){
             var newList =[];

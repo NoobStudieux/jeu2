@@ -11,18 +11,45 @@ function getJFromPseudo(pseudo)
 	})
 }
 exports.getJFromPseudo = getJFromPseudo;
-function getPFromId(idP)
+/*function supprSocket(sockID)
+{
+	var newSockList = [];
+	session.sockets.forEach(function(s){
+		if(sockID == s.id){} // sauter 
+		else{	newSockList.push(s.id);		}
+	})
+	session.sockets = newSockList;
+}
+exports.supprSocket = supprSocket;*/
+
+
+
+//  inutilisée
+
+
+/*function getPFromId(idP)
 {
 	return new Promise(function(resolve, reject){
+		var resolve = false;
 		session.parties.forEach(function(p) {
-			if(p.id == idP){return resolve(p);}
+			if(p.id == idP){return resolve(p); resolve = true; }
 		})
-		//ajouter reject ici (et dans com serveur.js)
+		if(resolve){}
+		else{return reject("la partie n'a pas été trouvée"); }
 	})
 }
-exports.getPFromId = getPFromId;
-exports.supprJoueur = function(pseudo)
+exports.getPFromId = getPFromId;*/
+exports.supprJoueur = function(pseudo, sockID)
 {
+// MAJ list sockets
+
+	var newSockList = [];
+	session.sockets.forEach(function(s){
+		if(sockID == s.id){} // sauter 
+		else{	newSockList.push(s.id);		}
+	})
+	session.sockets = newSockList;
+// MAJ liste joueurs
 	var newList = [];
 	session.joueursConnectes.forEach(function(j) {
 			if(j.pseudo == pseudo){return j;}
@@ -30,6 +57,7 @@ exports.supprJoueur = function(pseudo)
 		})
 	session.joueursConnectes = newList;
 }
+
 function InscrJAPartie(pseudo, idPartie)
 {
 	return new Promise(function(resolve, reject){

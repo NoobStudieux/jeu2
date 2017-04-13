@@ -20,15 +20,31 @@ console.log('demande liste');
 			socket.emit('majInfos', data);
 		});
 		socket.on('meVoila', function(pseudo) {
+			session.sockets.push(socket);
 			var joueur = new j.Joueur(pseudo, socket.id);
+socket.emit("test");
 			joueur.afficher();
 			session.joueursConnectes.push(joueur);
 			envoiMajInfos();
 		});
-		socket.on('deconnexion', function(pseudo) {
-			console.log(pseudo + " se deco");
-			m.desincrSiPartie(pseudo);
-			m.supprJoueur(pseudo);
+		socket.on('deconnexion', function(joueur) {
+			console.log(joueur.pseudo + " se deco");
+			m.DesinscrJDePartie(joueur.pseudo, joueur.idPartie);
+		//	m.desincrSiPartie(pseudo);
+			m.supprJoueur(joueur.pseudo, socket.id);
+//  *****
+
+/*	console.log("verif socket MAJ OK");
+	session.joueursConnectes.forEach(function(js){
+		console.log(js.pseudo + " - " + js.socket);
+	})
+	console.log("list socket ");
+	session.sockets.forEach(function(sckt){
+		console.log(sckt);
+	})*/
+
+
+//  *****
 			envoiMajInfos();
 		});
 		socket.on('jeMinscris', function(data) { // data['idPartie'] && data['pseudo']
@@ -81,6 +97,18 @@ console.log("sock annulerpartie : indexP : " + indexP + "  p.id :" + p.id + ", p
 		});
 		socket.on('lancerMaPartie', function(data) { // data['pseudo'] && data['idPartie']
 			console.log(data['pseudo'] + " veut lancer sa partie : " + data['idPartie'] );
+
+			session.parties.forEach(function(p){
+				if(data['idPartie'] == p.id) // on se positionne sur la partie concernée
+				{
+					p.inscrits.forEach(function(i){
+						console.log("test socket : " + i.socket.id);
+						var d = {idP: data['idPartie']};
+					//	io.sockets.socket(i.socket).emit('lancementPartie', d);
+					//	i.socket.emit('lancementPartie', d);
+					})
+				}
+			})
 		});
 
 // a supprimer : 
