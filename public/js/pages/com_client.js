@@ -8,8 +8,8 @@ socket.on('majInfos', function(data){ // joueurs et parties
 socket.on('probleme', function(message){
 console.log("recep pb : "  + message);
 });
-socket.on('lancementPartie', function(data){
-	alert("la partie n° " + data['idP'] + " à laquelle vous etes inscris va démarrer");
+socket.on('lancementPartie', function(idP){
+	alert("la partie n° " + idP + " à laquelle vous etes inscris va démarrer");
 });
 
 window.onbeforeunload = function() {
@@ -17,5 +17,5 @@ window.onbeforeunload = function() {
 }
 
 socket.on('test', function(){
-	alert("serveur vient de confirmer co");
+	//alert("serveur vient de confirmer co");
 });

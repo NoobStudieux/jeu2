@@ -105,7 +105,7 @@ function DesinscrJDePartie(pseudo, idPartie)
 	})	
 }
 exports.DesinscrJDePartie = DesinscrJDePartie;
-exports.desincrSiPartie = function(pseudo)
+/*exports.desincrSiPartie = function(pseudo)		// INUTILE ??
 {
 //  !!! ne touche qu'aux parties ou le joueur est inscris !!!
 	var listIdParties = []; // même si en principe un joueur ne peut être inscrit qu'à une partie
@@ -113,7 +113,7 @@ exports.desincrSiPartie = function(pseudo)
 		p.inscrits.forEach(function(i){		if(pseudo ==i){listIdParties.push(p.id);}	})
 	})
 	if(listIdParties.length > 0){	listIdParties.forEach(function(idP){	DesinscrJDePartie(pseudo, idP);	})		}
-}
+}*/
 exports.getPartieFromId = function(idPartie)
 {
 	var partieExiste = false;
