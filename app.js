@@ -20,7 +20,9 @@ session.sockets = [];  // objet socket de chaque client
 
 app.set('port', (process.env.PORT || 8080));
 
-app.use(express.static(__dirname + '/public')).use(express.static(__dirname + '/public/js'));
+app.use(express.static(__dirname + '/public'));
+    /*.use(express.static(__dirname + '/public/js'))
+    .use(express.static(__dirname + '/public/web/bipbip.png'));*/
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');

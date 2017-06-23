@@ -1,15 +1,15 @@
 {
   "name": "jeuDeQqchose",
   "version": "1.0.0",
-  "description": "?",
+  "description": "jeu de qqchose",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "noobstudieux",
+  "author": "Etienne<noobstudieux>",
   "license": "ISC",
   "dependencies": {
-	"express": "^4.14.1",
+    "express": "^4.14.1",
     "fs": "~0.0.1-security",
     "http": "~0.0.0",
     "os": "~0.1.1",
@@ -19,9 +19,7 @@
     "ent": "~0.1.0",
     "js-sha256": "~0.3.2",
     "promise": "^7.1.1",
-	"serve-static": "~1.11.2", 
+    "serve-static": "~1.11.2",
     "socket.io": "~1.2.1"
-  },
-  "author": "Etienne<noobstudieux>",
-  "description": "jeu de qqchose"
+  }
 }

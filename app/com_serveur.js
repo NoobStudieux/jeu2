@@ -8,7 +8,7 @@ exports.loadIoModule = function(server, app)
 console.log("partie juste créee : " + session.parties[0].id + " " + session.parties[0].jeu);
 
     io.sockets.on('connection', function (socket) {
-		function envoiMajInfos()
+		function envoiMajInfos() // envoi les j et p à tous les connectés
 		{
 			var data = {listP: session.parties, listJ: session.joueursConnectes};
 			socket.emit('majInfos', data);
@@ -57,48 +57,30 @@ console.log('demande liste');
 			}else{socket.emit('probleme', "vous ne pouvez pas créer de partie, cause : " + retourPeutCreerPartie[1]);}
 		});	
 		socket.on('jAnnuleMaPartie', function(data) { // data['pseudo'] && data['idPartie']
-			console.log(data['pseudo'] + " veut annuler unepartie de : " + data['idPartie'] );
-			var indexP = -1, indexJ = -1, compteur = 0;
-			var partieTrouvee = false;
-			session.parties.forEach(function(p){
-				if(p.id == data['idPartie']){
-					if(p.inscrits[0].pseudo == data['pseudo']){
-						partieTrouvee =true;
-						indexP = compteur;
-console.log("sock annulerpartie : indexP : " + indexP + "  p.id :" + p.id + ", p.inscrits[0] : " + p.inscrits[0] + ",  data['pseudo']  "  + data['pseudo']);
-					}
-					else{socket.emit('probleme', "vous n'êtes pas le chef de la partie : " + data['idPartie']);}
-					compteur ++;
-			}
-			})
-			if(partieTrouvee){
-				session.parties[indexP].devientAnnulee();
-				session.parties[indexP].inscrits.forEach(function(i){
-					i.setIdPartie(-1);
-				})
-				// m.annulerPartie(session.parties[indexP]);
-				envoiMajInfos();
-			}
-			else{	socket.emit('probleme', "partie pas trouvée : " + data['idPartie']);	}
+console.log("avant fonction");
+			m.annulerPartie(data['idPartie'], data['pseudo'])
+				.then(function(){	envoiMajInfos();	})
+				.catch(err => {		socket.emit("probleme", "err");	});
 		});
-
 		socket.on('lancerMaPartie', function(data) { // data['pseudo'] && data['idPartie']
 			console.log(data['pseudo'] + " veut lancer sa partie : " + data['idPartie'] );
 
 			session.parties.forEach(function(p){
 				if(data['idPartie'] == p.id) // on se positionne sur la partie concernée
 				{
+					p.devientEnCours();
 					p.inscrits.forEach(function(i){ // itération des inscrits stockés dans partie (objets joueurs)
 						session.sockets.forEach(function(s){
 							if(i.socket == s.id)
 							{ 							
-								s.emit('lancementPartie', data['idPartie']);  /*	 primo test des envois aux participants 	*/		
+								s.emit('lancementPartie', data['idPartie']);  /*	 primo test des envois aux participants 	*/
 							} 
 						})
-						var d = {idP: data['idPartie']};
+					//	var d = {idP: data['idPartie']};
 					})
 				}
 			})
+			envoiMajInfos();
 		});
 
 // a supprimer : 
@@ -119,5 +101,15 @@ socket.on('devGetListJoueurs', function() {
 	})
 	socket.emit('probleme', monMess);
 }); // fin à suppr
+socket.on('devGetListSockets', function() {
+	var monMess = "";
+	session.sockets.forEach(function(s){
+		monMess += String("\n" + s.id) ;
+	})
+console.log("devGetListSockets" + monMess);
+	socket.emit('probleme', monMess);
+}); // fin à suppr
+
+
     });
 }

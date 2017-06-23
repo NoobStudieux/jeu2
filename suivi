@@ -1,1 +1,6 @@
 mise en forme que pour md (bootstrap), change .ejs + public/js/module.js (majParties)
+
+concernant les couleurs des parties : à terme mettre une couleur par jeu (eventuellement combiné avec l'etat)
+
+DesinscrJDePartie : attention � la structure du promise
+

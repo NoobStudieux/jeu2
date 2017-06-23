@@ -8,16 +8,16 @@
 
   <% include ../partials/nav.ejs %>
   <% include ../partials/panneauJ.ejs %>
-<div id="saisiePseudo">
+  <div id="saisiePseudo">
 			<h4>Bonjour, saisissez votre pseudo pour cette session</h4>
 			<input type="text" id="inputSaisiePseudo" text="" autofocus/>
 			<div id="resultPseudo">
-resultPseudo
+        resultPseudo
 			</div>	
 			<button id="rentrer">rentrer</button>
-		</div>
-		<div id="accueil" class="container" hidden>Bienvenue <a id="bienvenuePseudo"></a>
-			<div class="row">
+	</div>
+		<div  id="accueil" class="container" hidden>Bienvenue <a id="bienvenuePseudo"></a>
+			<div id="accParties" class="row">
         <div id="lancerPartie" class="col-md-2">
           <h5>Lancer une partie</h5>
           <select id="selecNveauJeu">
@@ -26,23 +26,29 @@ resultPseudo
           <button id="boutonLancerPartie">lancer</button>
         </div>
         <div class="col-md-10">
-                <div id="parties" class="row">
+          <div id="parties" class="row">
 
-          
-               </div>
-
+    
+          </div>
         </div>
+        
 				<div id="enTete">enTete</div>
-			</div>			
+			</div>	
+      <div id="plateauJeu">plateauJeu
+        </div>		
 		</div>
+    
 <div id="QUEPOURDEV">
     <div>
       <h5>serveur</h5>
       <button id="getListParties">getListParties</button>
       <button id="getListJoueurs">getListJoueurs</button>
+      <button id="getListSockets">getListSockets</button>
     </div>
     <div>
       <h5>page</h5>
+      <button id="pageParties">getListParties</button>
+      <button id="pageJoueurs">getListJoueurs</button>
     </div>
 </div>
 <script src="/socket.io/socket.io.js"></script>

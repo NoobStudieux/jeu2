@@ -16,8 +16,6 @@ if(j.idPartie){console.log("idPartie : " + j.idPartie);}}
         })
 	}
     Modules.setWindowClientJ = setWindowClientJ;
-    
-    
 })(Modules || (Modules = {})); // FIN  namespace Modules
 var Page;
 (function (Page) {
@@ -140,6 +138,7 @@ le lanceur peut :
                         $(div).append(boutonSInscrire);
                     }
                     else{
+
                         var boutonSInscrire = $('<button>').text('s\'inscrire').addClass('boutonInscription');
                         $(div).append(boutonSInscrire);
                     }
@@ -242,16 +241,49 @@ var Events;
             var data = {pseudo: window.clientPseudo, jeu: $('#selecNveauJeu').val()};
             socket.emit('demandeCreationPartie', data);
 	    });
-// quepour le dev !!! : 
-$('#getListParties').click(function(){
-    socket.emit('devGetListParties');
-});
-$('#getListJoueurs').click(function(){
-    socket.emit('devGetListJoueurs');
-});
+        $("#plateauJeu").hide();
+       
 
+       /*var confirmOnLeave = function(msg) {
+ 
+            window.onbeforeunload = function (e) {
+                e = e || window.event;
+                msg = "voulez vous vraiement quitter ? ";
+        
+                // For IE and Firefox
+                if (e) {e.returnValue = msg;}
+        
+                // For Chrome and Safari
+                return msg;
+            };
+        };
+        confirmOnLeave();*/
 
-	}
+// que pour le dev !!! : 
+        $('#getListParties').click(function(){
+            socket.emit('devGetListParties');
+        }); 
+        $('#getListJoueurs').click(function(){
+            socket.emit('devGetListJoueurs');
+        });
+        $('#getListSockets').click(function(){
+            socket.emit('devGetListSockets');
+        });
+
+        
+        $('#pageJoueurs').click(function(){
+            console.log("#pageJoueurs");
+            window.listJ.forEach(function(j){
+                console.log(j.pseudo);
+            })
+        });
+        $('#pageParties').click(function(){     
+            console.log("#pageParties");
+            window.listP.forEach(function(pa){
+                console.log(pa.id + " - " + pa.jeu + " - " + pa.etat);
+            })
+        }); 
+    }
     Events.initConnexion = initConnexion;
 
     function refreshActionners()

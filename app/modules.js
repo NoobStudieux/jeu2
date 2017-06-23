@@ -11,50 +11,46 @@ function getJFromPseudo(pseudo)
 	})
 }
 exports.getJFromPseudo = getJFromPseudo;
-/*function supprSocket(sockID)
-{
-	var newSockList = [];
-	session.sockets.forEach(function(s){
-		if(sockID == s.id){} // sauter 
-		else{	newSockList.push(s.id);		}
-	})
-	session.sockets = newSockList;
-}
-exports.supprSocket = supprSocket;*/
 
-
-
-//  inutilisée
-
-
-/*function getPFromId(idP)
-{
-	return new Promise(function(resolve, reject){
-		var resolve = false;
-		session.parties.forEach(function(p) {
-			if(p.id == idP){return resolve(p); resolve = true; }
-		})
-		if(resolve){}
-		else{return reject("la partie n'a pas été trouvée"); }
-	})
-}
-exports.getPFromId = getPFromId;*/
 exports.supprJoueur = function(pseudo, sockID)
-{
-// MAJ list sockets
+{/*
 
+
+	if(session.sockets.length == 1 &&){
+
+	}else{
+
+	}*/
 	var newSockList = [];
+// MAJ list sockets
+/*var compteur = 0;*/
 	session.sockets.forEach(function(s){
 		if(sockID == s.id){} // sauter 
-		else{	newSockList.push(s.id);		}
+		else{	newSockList.push(s);		}
+/*console.log("compteur" + compteur + " , s : " + s.id);
+compteur ++;*/
 	})
+/*newSockList.forEach(function(ns){
+	console.log("nouvelle liste : " + ns.id);
+})*/
 	session.sockets = newSockList;
+/*console.log("longueur ancienne liste sockets : " + session.sockets.length);
+console.log("longueur new liste sockets : " + newSockList.length);
+	
+console.log("longueur liste sockets apres réa : " + session.sockets.length);
+console.log("nouvelle liste socket : ");
+compteur = 0;
+session.sockets.forEach(function(s){
+	console.log("compteur" + compteur + " , s : " + s.id);
+compteur ++;
+	})*/
 // MAJ liste joueurs
 	var newList = [];
 	session.joueursConnectes.forEach(function(j) {
 			if(j.pseudo == pseudo){return j;}
 			else{newList.push(j);}
 		})
+	//session.joueursConnectes.length = 0;
 	session.joueursConnectes = newList;
 }
 
@@ -105,15 +101,7 @@ function DesinscrJDePartie(pseudo, idPartie)
 	})	
 }
 exports.DesinscrJDePartie = DesinscrJDePartie;
-/*exports.desincrSiPartie = function(pseudo)		// INUTILE ??
-{
-//  !!! ne touche qu'aux parties ou le joueur est inscris !!!
-	var listIdParties = []; // même si en principe un joueur ne peut être inscrit qu'à une partie
-	session.parties.forEach(function(p){
-		p.inscrits.forEach(function(i){		if(pseudo ==i){listIdParties.push(p.id);}	})
-	})
-	if(listIdParties.length > 0){	listIdParties.forEach(function(idP){	DesinscrJDePartie(pseudo, idP);	})		}
-}*/
+
 exports.getPartieFromId = function(idPartie)
 {
 	var partieExiste = false;
@@ -152,8 +140,37 @@ exports.creationPartie = function(pseudo, jeu) // un joueur peut-il créeer une 
 	InscrJAPartie(pseudo, newPartie.id);
 	return true;
 }
-function annulerPartie(partie)
+function annulerPartie(idPartie, pseudo)
 {
-	partie.devientAnnulee();
+	return new Promise(function(resolve, reject){
+// vérification que la demande d'annulation émane d'un joueur connecté :
+		var pseudoConnecte = false;
+		session.joueursConnectes.forEach(function(j){
+			if(j.pseudo == pseudo){		pseudoConnecte = true;		}
+		})
+		if(!pseudoConnecte){	return reject("la demande d'annulation n'émane  pas d'un joueur connecté !");	}
+		var indexP = -1, indexJ = -1, compteur = 0;
+		var partieTrouvee = false;
+		session.parties.forEach(function(p){
+			if(p.id == idPartie){
+				if(p.inscrits[0].pseudo == pseudo){
+					partieTrouvee =true;
+					indexP = compteur;
+console.log("sock annulerpartie : indexP : " + indexP + "  p.id :" + p.id + ", p.inscrits[0] : " + p.inscrits[0] + ",  data['pseudo']  "  + pseudo);
+				}
+				else{return reject("la demande d'annulation n'émane  pas du détenteur de la partie !");}
+				compteur ++;
+			}
+		})
+		if(partieTrouvee){
+console.log("partie trouvée pour annulation. id : " + session.parties[indexP].id);
+			session.parties[indexP].devientAnnulee();
+			session.parties[indexP].inscrits.forEach(function(i){
+				i.setIdPartie(-1);
+			})
+			return resolve();
+		}
+		else{	return reject("la partie à annuler n'a pas été trouvée");	}
+	});
 }
 exports.annulerPartie = annulerPartie;

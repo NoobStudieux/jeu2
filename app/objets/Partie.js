@@ -14,7 +14,6 @@ function Partie(jeu="jeu non défini", listePartiesExistantes = []) { // class P
                 })
                 this.id= idMax;
             }
-			
 		};
         this.setIdPartie(listePartiesExistantes);
         
