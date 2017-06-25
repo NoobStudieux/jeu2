@@ -65,7 +65,20 @@ console.log('demande liste');
 		socket.on('lancerMaPartie', function(data) { // data['pseudo'] && data['idPartie']
 			console.log(data['pseudo'] + " veut lancer sa partie : " + data['idPartie'] );
 
-			session.parties.forEach(function(p){
+			m.lancerPartie(data['idPartie'], socket)
+				.then(p => {	
+					//envoiMajInfos();
+					p.inscrits.forEach(function(i){ // itération des inscrits stockés dans partie (objets joueurs)
+						session.sockets.forEach(function(s){
+							if(i.socket == s.id)
+							{ 							
+								s.emit('lancementPartie', data['idPartie']);  //	 primo test des envois aux participants
+							} 
+						})
+					})
+				})
+				.catch(err => {		socket.emit("probleme", "err");	}	);
+			/*session.parties.forEach(function(p){
 				if(data['idPartie'] == p.id) // on se positionne sur la partie concernée
 				{
 					p.devientEnCours();
@@ -73,14 +86,13 @@ console.log('demande liste');
 						session.sockets.forEach(function(s){
 							if(i.socket == s.id)
 							{ 							
-								s.emit('lancementPartie', data['idPartie']);  /*	 primo test des envois aux participants 	*/
+								s.emit('lancementPartie', data['idPartie']);  //	 primo test des envois aux participants
 							} 
 						})
 					//	var d = {idP: data['idPartie']};
 					})
 				}
-			})
-			envoiMajInfos();
+			})*/
 		});
 
 // a supprimer : 
