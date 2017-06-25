@@ -57,7 +57,7 @@ console.log('demande liste');
 			}else{socket.emit('probleme', "vous ne pouvez pas créer de partie, cause : " + retourPeutCreerPartie[1]);}
 		});	
 		socket.on('jAnnuleMaPartie', function(data) { // data['pseudo'] && data['idPartie']
-console.log("avant fonction");
+//console.log("avant fonction , id : "  + data['idPartie']);
 			m.annulerPartie(data['idPartie'], data['pseudo'])
 				.then(function(){	envoiMajInfos();	})
 				.catch(err => {		socket.emit("probleme", "err");	});

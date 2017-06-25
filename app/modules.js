@@ -151,16 +151,21 @@ function annulerPartie(idPartie, pseudo)
 		if(!pseudoConnecte){	return reject("la demande d'annulation n'émane  pas d'un joueur connecté !");	}
 		var indexP = -1, indexJ = -1, compteur = 0;
 		var partieTrouvee = false;
+console.log("annulerPartie : id : " + idPartie);
 		session.parties.forEach(function(p){
+console.log("session.parties.forEach(function(p) ,  p.id : " + p.id + ", idPartie : " + idPartie + ", compteur : " + compteur);
 			if(p.id == idPartie){
-				if(p.inscrits[0].pseudo == pseudo){
+				partieTrouvee =true;
+				indexP = compteur;
+				/*if(p.inscrits[0].pseudo == pseudo){
 					partieTrouvee =true;
 					indexP = compteur;
 console.log("sock annulerpartie : indexP : " + indexP + "  p.id :" + p.id + ", p.inscrits[0] : " + p.inscrits[0] + ",  data['pseudo']  "  + pseudo);
 				}
-				else{return reject("la demande d'annulation n'émane  pas du détenteur de la partie !");}
-				compteur ++;
+				else{return reject("la demande d'annulation n'émane  pas du détenteur de la partie !");}*/
+				
 			}
+			compteur ++;
 		})
 		if(partieTrouvee){
 console.log("partie trouvée pour annulation. id : " + session.parties[indexP].id);
@@ -168,6 +173,7 @@ console.log("partie trouvée pour annulation. id : " + session.parties[indexP].i
 			session.parties[indexP].inscrits.forEach(function(i){
 				i.setIdPartie(-1);
 			})
+			session.parties[indexP].inscrits = [];
 			return resolve();
 		}
 		else{	return reject("la partie à annuler n'a pas été trouvée");	}
