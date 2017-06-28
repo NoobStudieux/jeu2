@@ -1,5 +1,7 @@
 var session = require('cookie-session');
 var m = require('./modules.js');
+var dm = require('./jeuDes10000/jeuDes10000.js');
+
 exports.loadIoModule = function(server, app)
 {
     var io = require('socket.io').listen(server);
@@ -67,12 +69,20 @@ console.log('demande liste');
 
 			m.lancerPartie(data['idPartie'], socket)
 				.then(p => {	
-					//envoiMajInfos();
+					var donnees = {idPartie: data['idPartie'], 
+									premierLance: dm.lancer5Des(), joueurCommencant: dm.selecJoueurCommencant(p).pseudo};	
+console.log("partie : " + donnees['idPartie'] + ", premierLance" + donnees['premierLance'] + ", joueurCommencant : " + donnees['joueurCommencant']);
+//console.log(dm.lancer5Des() + dm.selecJoueurCommencant(p).pseudo);*/
 					p.inscrits.forEach(function(i){ // itération des inscrits stockés dans partie (objets joueurs)
 						session.sockets.forEach(function(s){
 							if(i.socket == s.id)
-							{ 							
-								s.emit('lancementPartie', data['idPartie']);  //	 primo test des envois aux participants
+							{ 		
+								/*var donnees = {idPartie: data['idPartie'], joueurCommencant: dm.selecJoueurCommencant(p),
+									premierLance: dm.lancer5Des()};	
+console.log("partie : " + donnees[idPartie]); + ", joueur commençant : " + donnees[joueurCommencant] + 
+			", premierLance" + donnees[premierLance]);		*/	
+
+								s.emit('lancementPartie', donnees);  //	 primo test des envois aux participants
 							} 
 						})
 					})

@@ -133,6 +133,22 @@ exports.peutCreerPartie = function(pseudo) // un joueur peut-il créeer une part
 	if(peut){var retour = [true, "aucune"]; return retour;}
 	else{var retour = [false, "aucune"]; return retour;}
 }
+/*function socketFromPseudo(pseudo)
+{
+	return new Promise(function(resolve, reject){
+		var socketTrouvee = false;
+		session.joueursConnectes.forEach(function(j){
+			if(pseudo == j.pseudo){
+				session.sockets.forEach(function(s){
+					if(j.socket == s.id){
+						socketTrouvee = true;
+					}
+				})
+			}
+		})
+	});
+}
+exports.socketFromPseudo = socketFromPseudo;*/
 exports.creationPartie = function(pseudo, jeu) // un joueur peut-il créeer une partie ?
 {
 	var newPartie = new p.Partie(jeu, session.parties);

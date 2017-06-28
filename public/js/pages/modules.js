@@ -150,57 +150,6 @@ le lanceur peut :
                 var info = $('<a>').text('etat partie : ' + p.etat);
                 $(div).append(info);
             }
-
-
-
-
-               /* $(div).addClass('partieLancee btn-group');
-                if(p.inscrits.length > 0)
-                {
-                    if(p.inscrits[0].pseudo && p.inscrits[0].pseudo == window.clientPseudo && p.inscrits.length >= p.nbJMin){
-                        var boutonLancer = $('<button>').text("lancer").addClass('lancerPartie');
-                        var annonceLancer = $('<a>').text("vous seul pouvez lancer cette partie").addClass("advertOK");
-                        $('#parties').append($('<div>').append(annonceLancer, boutonLancer));
-                        valBoutonSInscrire= "Annuler"; classBoutonInscription="boutonAnnulation";
-                        $(valBoutonSInscrire).addClass("btn btn-warning");
-                    }else if(p.inscrits[0].pseudo == window.clientPseudo && p.inscrits.length < p.nbJMin){
-                        var affichLancer = $('<a>').text("pas assez d'inscrits pour lancer").addClass('advertKO');
-                        var annonceLancer = $('<a>').text("vous seul pouvez lancer cette partie").addClass("advertOK");
-                        $('#parties').append($('<div>').append(annonceLancer, affichLancer));
-                        valBoutonSInscrire= "Annuler"; classBoutonInscription="boutonAnnulation";
-                        $(boutonSInscrire).addClass("btn btn-warning");
-                    }
-                
-                if(window.clientJ.idPartie == -1){
-                    if(p.nbJMax <= p.inscrits.length){valBoutonSInscrire= "complete"; classBoutonInscription="a"; $(boutonSInscrire).prop('disabled', true);}
-                    else{valBoutonSInscrire= "S'inscrire"; classBoutonInscription="boutonInscription";}
-                }else if(window.clientJ.idPartie == p.id){valBoutonSInscrire= "Se désinscrire"; classBoutonInscription="boutonDesinscription";}
-                else{valBoutonSInscrire= "déjà inscrit ailleurs"; classBoutonInscription="boutonDejaInscrit"; $(boutonSInscrire).prop('disabled', true);}
-            }else if(p.etat == "enCours"){
-                $(div).addClass('enCours');
-                valBoutonSInscrire= "partie en cours .. "; classBoutonInscription="partieEnCours"; $(boutonSInscrire).prop('disabled', true);
-            }else if(p.etat == "finie"){
-                valBoutonSInscrire= "partie finie .. "; classBoutonInscription="partieFinie"; $(boutonSInscrire).prop('disabled', true);
-                $(div).addClass('finie');
-            }else if(p.etat == "annulee"){
-                valBoutonSInscrire= "partie annulée .. "; classBoutonInscription="partieAnnulee"; $(boutonSInscrire).prop('disabled', true);
-                $(div).addClass('annulee');
-            }*/
-                /*if(p.inscrits.length > 0 && p.inscrits[0] == window.clientPseudo 
-                && p.inscrits.length >= p.nbJMin){
-                    var boutonLancer = $('<button>').text("lancer").addClass('lancerPartie');
-                    var annonceLancer = $('<a>').text("vous seul pouvez lancer cette partie").addClass("advertOK");
-                    $('#parties').append($('<div>').append(annonceLancer, boutonLancer));
-                }
-                if(window.clientJ.idPartie == -1){
-                    if(p.nbJMax <= p.inscrits.length){valBoutonSInscrire= "complete"; classBoutonInscription="a"; $(boutonSInscrire).prop('disabled', true);}
-                    else{valBoutonSInscrire= "S'inscrire"; classBoutonInscription="boutonInscription";}
-                }
-                else if(window.clientJ.idPartie == p.id){valBoutonSInscrire= "Se désinscrire"; classBoutonInscription="boutonDesinscription";}
-                else{valBoutonSInscrire= "déjà inscrit"; classBoutonInscription="boutonDejaInscrit";}
-            $(boutonSInscrire).text(valBoutonSInscrire).addClass(classBoutonInscription);*/
-           /* $(boutonSInscrire).text(valBoutonSInscrire).addClass(classBoutonInscription);
-            $(div).append(boutonSInscrire);*/
         })
         updateBandeauLancerPartie();
         Events.refreshActionners();
